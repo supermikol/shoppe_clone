@@ -1,33 +1,33 @@
-*.rbc
-capybara-*.html
-.rspec
-/log
-/tmp
-/db/*.sqlite3
-/db/*.sqlite3-journal
-/public/system
-/coverage/
-/spec/tmp
-**.orig
-rerun.txt
-pickle-email-*.html
-.env
+shoppe/*.rbc
+shoppe/capybara-*.html
+shoppe/.rspec
+shoppe/log
+shoppe/tmp
+shoppe/db/*.sqlite3
+shoppe/db/*.sqlite3-journal
+shoppe/public/system
+shoppe/coverage/
+shoppe/spec/tmp
+shoppe/**.orig
+shoppe/rerun.txt
+shoppe/pickle-email-*.html
+shoppe/.env
 
 ## Environment normalisation:
-/.bundle
+shoppe/.bundle
 /vendor/bundle
 
 # these should all be checked in to normalise the environment:
 # Gemfile.lock, .ruby-version, .ruby-gemset
 
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
-.rvmrc
+shoppe/.rvmrc
 
 # if using bower-rails ignore default bower_components path bower.json files
-/vendor/assets/bower_components
-*.bowerrc
-bower.json
+shoppe/vendor/assets/bower_components
+shoppe/*.bowerrc
+shoppe/bower.json
 
 # Ignore pow environment settings
-.powenv
-node_modules
+shoppe/.powenv
+shoppe/node_modules
