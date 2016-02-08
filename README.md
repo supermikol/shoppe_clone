@@ -15,7 +15,7 @@ The first iteration is provided below.  After it is complete, you will meet with
 - Write down user stories.  Where would be a good place to document the user stories?
 - Whiteboard some mockups and page flows and add them to the documentation.
 - Whiteboard the data and schema you'll need to keep track of for this app to work and add that to the documentation.
-- Create a Rails application with functionality for managing products.  It'll be helpful to have a baseline where the client can enter products into the system, manage the products, and view them.
+- Add functionality for managing products to the included Rails application skeleton.  It'll be helpful to have a baseline where the client can enter products into the system, manage the products, and view them.
 - We will not need any authentication mechanism.
 - Please include styles for the website and image placeholders for the products
 
