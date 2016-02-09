@@ -1,0 +1,15 @@
+=form_for([@category, @animal]) do |f|
+  %p
+    = f.label :name
+    = f.text_field :name
+  %p
+    = f.label :species
+    = f.text_field :species
+  %p
+    = f.label :details
+    = f.text_area :details
+  %p
+    = f.label :price
+    = f.number_field :price
+  %p
+    = f.submit

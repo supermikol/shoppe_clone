@@ -26,3 +26,42 @@ Things you may want to cover:
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
+
+User Stories:
+
+Managing end:
+Admin page:
+Show categories (create/edit/delete buttons)
+  Show animals (create/edit/delete buttons)
+Create category
+Create animal
+Update category
+Update animal
+
+
+Online store for selling sea animals (sea anenomes, sea lions)
+Homepage: categories of sea animal breed, and also top sellers
+
+Categories: Echinoderms(jellyfish), Crustaceans, Sea mammals, Fish, Poriferas
+
+Show-animal page: name, species, age, measurements, bio
+
+(shopping-aquarium) Checkout-page:
+
+homepage -> category page -> show animal page (post requests) -> checkout page
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

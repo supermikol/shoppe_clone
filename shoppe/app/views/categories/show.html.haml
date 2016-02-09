@@ -1,0 +1,14 @@
+= @category.name
+
+
+%h3 Animals
+= render @category.animals
+
+
+- @animal = @category.animals.build
+%h3 Add an Animal
+= render 'animals/form'
+
+
+= link_to 'Edit', edit_category_path(@category)
+= link_to 'Back', categories_path
