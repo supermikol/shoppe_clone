@@ -1,15 +1,19 @@
 =form_for([@category, @animal]) do |f|
-  %p
+  %label
     = f.label :name
+  %p
     = f.text_field :name
-  %p
+  %label
     = f.label :species
+  %p
     = f.text_field :species
-  %p
+  %label
     = f.label :details
+  %p
     = f.text_area :details
-  %p
+  %label
     = f.label :price
-    = f.number_field :price
   %p
+    = f.number_field :price
+  %label
     = f.submit

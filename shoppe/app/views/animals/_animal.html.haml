@@ -1,8 +1,9 @@
-%p
-  %strong= animal.name
-%p= animal.species
-%p= animal.details
-%p= animal.price
+.individual-animal.col-md-3
+  %p
+    %strong= animal.name
+  %p= animal.species
+  %p= animal.details
+  %p= animal.price
 
-= link_to 'Obliterate Animal', [animal.category, animal], method: :delete, data: {confirm: 'Are you sure?'}
-= link_to 'Edit Animal', edit_category_animal_path(animal.category, animal)
+  = link_to 'Obliterate Animal', [animal.category, animal], method: :delete, data: {confirm: 'Are you sure?'}
+  = link_to 'Edit Animal', edit_category_animal_path(animal.category, animal)
