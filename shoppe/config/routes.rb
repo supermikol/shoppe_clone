@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'categories/all', to: 'navigation#all'
   get 'categories/:id', to: 'navigation#categories'
 
 end

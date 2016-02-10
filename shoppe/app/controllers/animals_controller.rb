@@ -10,7 +10,7 @@ class AnimalsController < ApplicationController
 
     if @animal.save
       flash[:success] = ['Animal is Born!']
-      redirect_to category_path(@category)
+      redirect_to categories_path
     else
       flash[:warning] = @animal.errors.full_messages
       redirect_to category_path(@category)
@@ -19,7 +19,13 @@ class AnimalsController < ApplicationController
   end
 
   def new
+    @category = Category.find(params[:category_id])
     @animal = Animal.new
+    if request.xhr?
+      render '_form', layout: false
+    else
+      render '_form'
+    end
   end
 
   def edit
@@ -36,7 +42,7 @@ class AnimalsController < ApplicationController
 
     if @animal.update(animal_params)
       flash[:success] = ['Animal is updated!']
-      redirect_to category_path(@category)
+      redirect_to categories_path
     else
       flash.now[:warning] = @animal.errors.full_messages
       render 'edit'
@@ -48,7 +54,7 @@ class AnimalsController < ApplicationController
     @category = Category.find(params[:category_id])
     @animal = @category.animals.find(params[:id])
     @animal.destroy
-    redirect_to category_path(@category)
+    redirect_to categories_path
   end
 
 private

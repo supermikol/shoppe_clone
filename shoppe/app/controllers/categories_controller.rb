@@ -5,12 +5,13 @@ class CategoriesController < ApplicationController
     @categories = Category.all
   end
 
+
   def create
     @category = Category.new(category_params)
 
     if @category.save
       flash[:success] = ['Category Created!']
-      redirect_to @category
+      redirect_to categories_path
     else
       flash.now[:warning] = @category.errors.full_messages
       render 'new'
@@ -23,6 +24,9 @@ class CategoriesController < ApplicationController
 
   def edit
     @category = Category.find(params[:id])
+    if request.xhr?
+      render 'edit', layout: false
+    end
   end
 
   def show
@@ -38,7 +42,7 @@ class CategoriesController < ApplicationController
 
     if @category.update(category_params)
       flash[:success] = ['Category Updated!']
-      redirect_to @category
+      redirect_to categories_path
     else
       flash.now[:warning] = @category.errors.full_messages
       render 'edit'
