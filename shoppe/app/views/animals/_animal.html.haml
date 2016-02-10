@@ -1,9 +1,14 @@
 .individual-animal.col-md-3
   %p
     %strong= animal.name
-  %p= animal.species
-  %p= animal.details
-  %p= animal.price
+  %p= "Species: #{animal.species}"
+  %p= "Bio: #{animal.details}"
+  %p= "Price: #{animal.price}"
+  %p= "Quantity: #{animal.quantity}"
+  %img{src: animal.img_url, style: "width: 100px;"}/
 
-  = link_to 'Obliterate Animal', [animal.category, animal], method: :delete, data: {confirm: 'Are you sure?'}
-  = link_to 'Edit Animal', edit_category_animal_path(animal.category, animal)
+  - if @admin
+    .row
+      = link_to "Obliterate #{animal.name}", [animal.category, animal], method: :delete, data: {confirm: 'Are you sure?'}
+    .row
+      = link_to "Edit #{animal.name}", edit_category_animal_path(animal.category, animal)

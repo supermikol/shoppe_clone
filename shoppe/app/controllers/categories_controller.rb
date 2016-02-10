@@ -1,4 +1,6 @@
 class CategoriesController < ApplicationController
+  http_basic_authenticate_with name: 'admin', password: 'secret'
+
   def index
     @categories = Category.all
   end
@@ -6,8 +8,13 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
 
-    @category.save
-    redirect_to @category
+    if @category.save
+      flash[:success] = ['Category Created!']
+      redirect_to @category
+    else
+      flash.now[:warning] = @category.errors.full_messages
+      render 'new'
+    end
   end
 
   def new
@@ -19,15 +26,21 @@ class CategoriesController < ApplicationController
   end
 
   def show
+    @admin = true
     @category = Category.find(params[:id])
+    if request.xhr?
+      render 'show', layout: false
+    end
   end
 
   def update
     @category = Category.find(params[:id])
 
     if @category.update(category_params)
+      flash[:success] = ['Category Updated!']
       redirect_to @category
     else
+      flash.now[:warning] = @category.errors.full_messages
       render 'edit'
     end
   end

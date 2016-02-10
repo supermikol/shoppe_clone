@@ -3,7 +3,9 @@ class CreateAnimals < ActiveRecord::Migration
     create_table :animals do |t|
       t.string :name
       t.string :species
+      t.string :img_url
       t.text :details
+      t.integer :quantity
       t.float :price
       t.references :category, index: true, foreign_key: true
 

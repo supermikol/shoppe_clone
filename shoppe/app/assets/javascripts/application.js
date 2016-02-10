@@ -13,3 +13,19 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+$( document ).ready(function() {
+    $('.nav-tabs').on('click', 'a', function(event){
+      event.preventDefault();
+      url = $(event.target).attr('href')
+      $.ajax({
+        method: 'GET',
+        url: url
+      })
+      .done(function(response){
+        $('.category_page').html(response)
+
+      })
+
+    })
+    console.log( "ready!" );
+});

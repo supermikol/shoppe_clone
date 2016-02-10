@@ -11,7 +11,7 @@
 		.container-fluid
 			.row.col-md-12
 				%h1
-				%a.navbar-brand{:href => "/"} Sea Animal Pet Store 
+				%a.navbar-brand{:href => "/"} Sea Animal Pet Store
 				%nav
 					%ul.nav.navbar-nav.navbar-right
 						%li
@@ -19,4 +19,7 @@
 						%li
 							%a{:href => "/users/login"} Log in
 		.container
+		- flash.each do |message_type, message|
+			- message.each do |x|
+				%div{:class => "alert alert-#{message_type}"}= x
 	= yield

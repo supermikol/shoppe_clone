@@ -2,10 +2,12 @@ Rails.application.routes.draw do
 
   root 'navigation#home'
 
-  resources :categories do
-    resources :animals
+  scope '/admin' do
+    resources :categories do
+      resources :animals
+    end
   end
 
-  # get 'sales', to: 'welcome#index'
+  get 'categories/:id', to: 'navigation#categories'
 
 end

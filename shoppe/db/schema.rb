@@ -19,7 +19,9 @@ ActiveRecord::Schema.define(version: 20160208230558) do
   create_table "animals", force: :cascade do |t|
     t.string   "name"
     t.string   "species"
+    t.string   "img_url"
     t.text     "details"
+    t.integer  "quantity"
     t.float    "price"
     t.integer  "category_id"
     t.datetime "created_at",  null: false
