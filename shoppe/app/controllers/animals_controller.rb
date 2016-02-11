@@ -5,9 +5,9 @@ class AnimalsController < ApplicationController
   end
 
   def create
-    params[:animal][:categories].delete("")
+    params[:animal][:category_ids].delete("")
     @animal = Animal.new(animal_params)
-    params[:animal][:categories].each do |cat_id|
+    params[:animal][:category_ids].each do |cat_id|
       @animal.categories << Category.find(cat_id)
     end
 
@@ -16,7 +16,7 @@ class AnimalsController < ApplicationController
       redirect_to categories_path
     else
       flash[:warning] = @animal.errors.full_messages
-      redirect_to category_path(@category)
+      render 'new'
     end
 
   end
@@ -32,16 +32,19 @@ class AnimalsController < ApplicationController
   end
 
   def edit
-    @category = Category.find(params[:category_id])
-    @animal = @category.animals.find(params[:id])
+    @animal = Animal.find(params[:id])
   end
 
   def show
   end
 
   def update
-    @category = Category.find(params[:category_id])
-    @animal = @category.animals.find(params[:id])
+    @animal = Animal.find(params[:id])
+    params[:animal][:category_ids].delete("")
+    @animal.categories.clear
+    params[:animal][:category_ids].each do |cat_id|
+      @animal.categories << Category.find(cat_id)
+    end
 
     if @animal.update(animal_params)
       flash[:success] = ['Animal is updated!']
@@ -54,16 +57,16 @@ class AnimalsController < ApplicationController
   end
 
   def destroy
-    @category = Category.find(params[:category_id])
-    @animal = @category.animals.find(params[:id])
-    @animal.destroy
+    @animal = Animal.find(params[:id])
+    @animal.categories = []
+    @animal.delete
     redirect_to categories_path
   end
 
 private
 
   def animal_params
-    params.require(:animal).permit(:name, :quantity, :img_url, :species, :details, :price)
+    params.require(:animal).permit(:name, :quantity, :img_url, :species, :details, :price, :category_ids)
   end
 
 end

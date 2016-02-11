@@ -9,6 +9,6 @@
 
   - if @admin
     .row
-      = link_to "Obliterate #{animal.name}", [animal.category, animal], method: :delete, data: {confirm: 'Are you sure?'}
+      = link_to "Obliterate #{animal.name}", animal_path(animal), method: :delete, data: {confirm: 'Are you sure?'}
     .row
-      = link_to "Edit #{animal.name}", edit_category_animal_path(animal.category, animal)
+      = link_to "Edit #{animal.name}", edit_animal_path(animal)

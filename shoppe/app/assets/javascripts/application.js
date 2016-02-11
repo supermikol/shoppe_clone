@@ -48,7 +48,7 @@ $( document ).ready(function() {
     })
   })
 
-  $('.category_page').on('click', '#edit_category', function(e){
+  $('.add-content').on('click', 'a', function(e){
     e.preventDefault();
     var link = $(this).attr('href')
     $.ajax({
@@ -57,7 +57,7 @@ $( document ).ready(function() {
     })
     .done(function(response){
       $("#edit_category").hide();
-      $('#category-editor').html(response)
+      $('.add-content-form').html(response)
     })
   })
 });

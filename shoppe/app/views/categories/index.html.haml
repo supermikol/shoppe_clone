@@ -1,9 +1,10 @@
 .container
 
   %h1 Admin Index
-
-  %h4= link_to 'Add New Category', new_category_path
-
+  .add-content
+    %h4= link_to 'Add New Category', new_category_path
+    %h4= link_to 'Add Animal', new_animal_path, id: "add_animal"
+  .add-content-form
   %ul.nav.nav-tabs
     - @categories.each do |category|
       %li{:role => "presentation"}

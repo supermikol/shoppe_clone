@@ -16,12 +16,15 @@ class CategoriesController < ApplicationController
       redirect_to categories_path
     else
       flash.now[:warning] = @category.errors.full_messages
-      render 'new'
+      render 'form'
     end
   end
 
   def new
     @category = Category.new
+    if request.xhr?
+      render 'new', layout: false
+    end
   end
 
   def edit

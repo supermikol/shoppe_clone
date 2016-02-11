@@ -17,11 +17,11 @@
     = f.text_field :img_url
   %label
     = f.label :categories
-    = f.collection_check_boxes :categories, Category.all, :id, :name do |b|
+    = f.collection_check_boxes :category_ids, Category.all, :id, :name do |b|
       .collection-check-box
         = b.check_box
         = b.label
-  <br>
+  %br
   %label
     = f.label :quantity
   %p
