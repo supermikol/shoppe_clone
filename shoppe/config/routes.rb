@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   root 'navigation#home'
 
   scope '/admin' do
-    resources :categories do
-      resources :animals
-    end
+    resources :categories, :animals
   end
 
   get 'categories/all', to: 'navigation#all'

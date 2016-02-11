@@ -5,8 +5,11 @@ class AnimalsController < ApplicationController
   end
 
   def create
-    @category = Category.find(params[:category_id])
-    @animal = @category.animals.create(animal_params)
+    params[:animal][:categories].delete("")
+    @animal = Animal.new(animal_params)
+    params[:animal][:categories].each do |cat_id|
+      @animal.categories << Category.find(cat_id)
+    end
 
     if @animal.save
       flash[:success] = ['Animal is Born!']
@@ -19,7 +22,7 @@ class AnimalsController < ApplicationController
   end
 
   def new
-    @category = Category.find(params[:category_id])
+    @categories = Category.all
     @animal = Animal.new
     if request.xhr?
       render '_form', layout: false

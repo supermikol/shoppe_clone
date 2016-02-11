@@ -1,5 +1,7 @@
 class CategoriesController < ApplicationController
   http_basic_authenticate_with name: 'admin', password: 'secret'
+  before_action :require_admin
+
 
   def index
     @categories = Category.all
@@ -60,5 +62,14 @@ private
   def category_params
     params.require(:category).permit(:name)
   end
+
+  def require_admin
+    unless current_user.admin
+      flash[:error] = "You must be an admin to access this section"
+      redirect_to "/"
+    end
+  end
+
+
 
 end

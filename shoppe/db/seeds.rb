@@ -11,5 +11,15 @@
 end
 
 20.times do
-  Animal.create(name: Faker::Commerce.product_name, species: Faker::Commerce.product_name, details: Faker::Hacker.say_something_smart, price: Faker::Commerce.price, img_url: Faker::Avatar.image(Faker::Name.first_name, "100x100"), quantity: rand(1..20),  category_id: rand(1..5))
+  Animal.create(name: Faker::Commerce.product_name, species: Faker::Commerce.product_name, details: Faker::Hacker.say_something_smart, price: Faker::Commerce.price, img_url: Faker::Avatar.image(Faker::Name.first_name, "100x100"), quantity: rand(1..20))
+end
+
+30.times do
+  animal = Animal.all.sample
+  category = Category.all.sample.animals
+  if category.include?(animal)
+    next
+  else
+    category << animal
+  end
 end

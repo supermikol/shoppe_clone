@@ -15,14 +15,22 @@
 				.navbar-header
 					%a.navbar-brand{:href => "/"} Sea Animal Pet Store
 				%ul.nav.navbar-nav.navbar-right
-					%li
-						=link_to "Admin", categories_path
-					%li
-						%a{:href => "/users/new"} Sign Up
-					%li
-						%a{:href => "/users/login"} Log in
+					- if !user_signed_in?
+						%li
+							=link_to "Register", new_user_registration_path
+						%li
+							=link_to "Login", new_user_session_path
+					- else
+						- if current_user.admin
+							%li
+								=link_to "Admin", categories_path
+						%li
+							=link_to "Log out", destroy_user_session_path, method: :delete
 		.container
 		- flash.each do |message_type, message|
-			- message.each do |x|
-				%div{:class => "alert alert-#{message_type}"}= x
+			- if message.is_a?(Array)
+				- message.each do |x|
+					%div{:class => "alert alert-#{message_type}"}= x
+			- else
+				%div{:class => "alert alert-#{message_type}"}= message
 	= yield
