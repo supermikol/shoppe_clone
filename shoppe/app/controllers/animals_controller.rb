@@ -1,5 +1,5 @@
 class AnimalsController < ApplicationController
-  http_basic_authenticate_with name: 'admin', password: 'secret'
+  before_action :require_admin
 
   def index
   end
@@ -69,4 +69,10 @@ private
     params.require(:animal).permit(:name, :quantity, :img_url, :species, :details, :price, :category_ids)
   end
 
+  def require_admin
+    unless current_user.admin
+      flash[:error] = "You must be an admin to access this section"
+      redirect_to "/"
+    end
+  end
 end

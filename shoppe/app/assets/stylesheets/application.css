@@ -13,14 +13,3 @@
  *= require_tree .
  *= require_self
  */
- .individual-animal {
- 	margin: 10px;
- 	padding: 30px;
- 	border: solid 1px #eee;
- }
- .table-categories {
- 	border: 1px solid #ddd;
- }
- td {
- 	padding: 20px 30px 20px 20px;
- }

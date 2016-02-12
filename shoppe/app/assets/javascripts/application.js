@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require_tree .
 $( document ).ready(function() {
-
   $.ajax({
       method: 'GET',
       url: '/categories/all'
@@ -35,18 +34,18 @@ $( document ).ready(function() {
     })
   })
 
-  $('.category_page').on('click', '#add_animal', function(e){
-    e.preventDefault();
-    var link = $(this).attr('href')
-    $.ajax({
-      method: 'GET',
-      url: link
-    })
-    .done(function(response){
-      $("#add_animal").hide();
-      $('#animal-adder').html(response)
-    })
-  })
+  // $('.category_page').on('click', '#add_animal', function(e){
+  //   e.preventDefault();
+  //   var link = $(this).attr('href')
+  //   $.ajax({
+  //     method: 'GET',
+  //     url: link
+  //   })
+  //   .done(function(response){
+  //     $("#add_animal").hide();
+  //     $('#animal-adder').html(response)
+  //   })
+  // })
 
   $('.add-content').on('click', 'a', function(e){
     e.preventDefault();
@@ -56,8 +55,20 @@ $( document ).ready(function() {
       url: link
     })
     .done(function(response){
-      $("#edit_category").hide();
       $('.add-content-form').html(response)
+    })
+  })
+
+  $('.category_page').on('click', '#edit_category', function(e){
+    e.preventDefault();
+    var link = $(this).attr('href')
+    $.ajax({
+      method: 'GET',
+      url: link
+    })
+    .done(function(response){
+      $("#edit_category").hide();
+      $('#category-editor').html(response)
     })
   })
 });

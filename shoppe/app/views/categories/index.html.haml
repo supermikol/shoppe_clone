@@ -6,6 +6,8 @@
     %h4= link_to 'Add Animal', new_animal_path, id: "add_animal"
   .add-content-form
   %ul.nav.nav-tabs
+    %li{:role => "presentation"}
+      %a{:href => "/categories/all"}= "All"
     - @categories.each do |category|
       %li{:role => "presentation"}
         %a{:href => "#{category_path(category)}"}= category.name

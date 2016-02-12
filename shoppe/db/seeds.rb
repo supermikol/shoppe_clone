@@ -23,3 +23,9 @@ end
     category << animal
   end
 end
+
+User.create(email: "admin@admin.com", password: "password", admin: true)
+
+Order.create(animal_id: 1, user_id: 1, item_quantity: 1, checked_out: false, address: "542 folsom")
+Order.create(animal_id: 2, user_id: 1, item_quantity: 3, checked_out: false, address: "542 folsom")
+Order.create(animal_id: 3, user_id: 1, item_quantity: 2, checked_out: false, address: "542 folsom")

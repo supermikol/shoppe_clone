@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160211010752) do
+ActiveRecord::Schema.define(version: 20160211225659) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,10 +21,10 @@ ActiveRecord::Schema.define(version: 20160211010752) do
     t.string   "species"
     t.string   "img_url"
     t.text     "details"
-    t.integer  "quantity"
+    t.integer  "quantity",   default: 0
     t.float    "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "animals_categories", force: :cascade do |t|
@@ -45,10 +45,19 @@ ActiveRecord::Schema.define(version: 20160211010752) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string   "address"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "animal_id"
+    t.integer  "user_id"
+    t.integer  "item_quantity",                 null: false
+    t.boolean  "checked_out",   default: false
+    t.datetime "checkout_date"
+    t.integer  "order_num"
+    t.text     "address"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
+
+  add_index "orders", ["animal_id"], name: "index_orders_on_animal_id", using: :btree
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name",                   default: "",    null: false
@@ -72,4 +81,6 @@ ActiveRecord::Schema.define(version: 20160211010752) do
 
   add_foreign_key "animals_categories", "animals"
   add_foreign_key "animals_categories", "categories"
+  add_foreign_key "orders", "animals"
+  add_foreign_key "orders", "users"
 end

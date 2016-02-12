@@ -5,7 +5,7 @@ class CreateAnimals < ActiveRecord::Migration
       t.string :species
       t.string :img_url
       t.text :details
-      t.integer :quantity
+      t.integer :quantity, default: 0
       t.float :price
       t.timestamps null: false
     end

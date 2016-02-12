@@ -1,0 +1,18 @@
+%h1 Checkout Page
+
+%table.table.table-hover
+  %tr
+    %th Item Name
+    %th Item Quantity
+    %th Price
+  -total = 0
+  - @orders.each do |order|
+    %tr
+      %td= order.animal.name
+      %td= order.item_quantity
+      %td= (order.animal.price * order.item_quantity).round(2)
+      -total += order.animal.price * order.item_quantity
+  %tr
+    %td
+    %td Total:
+    %td= total.round(2)

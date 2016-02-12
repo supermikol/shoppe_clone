@@ -7,7 +7,14 @@ Rails.application.routes.draw do
     resources :categories, :animals
   end
 
+  resources :orders
+
+  get "/checkout", to: "orders#checkout_complete"
+  put '/checkout', to: 'orders#checkout'
+
   get 'categories/all', to: 'navigation#all'
   get 'categories/:id', to: 'navigation#categories'
+  get 'cart', to: 'navigation#cart'
+  post 'order/:id', to: 'navigation#add_to_cart'
 
 end
