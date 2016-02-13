@@ -1,16 +1,16 @@
-.container
 
-  %h1 Admin Index
-  .add-content
-    %h4= link_to 'Add New Category', new_category_path
-    %h4= link_to 'Add Animal', new_animal_path, id: "add_animal"
-  .add-content-form
-  %ul.nav.nav-tabs
+
+%h1 Admin Index
+.add-content
+  %h4= link_to 'Add New Category', new_category_path
+  %h4= link_to 'Add Animal', new_animal_path, id: "add_animal"
+.add-content-form
+%ul.nav.nav-tabs
+  %li{:role => "presentation"}
+    %a{:href => "/categories/all"}= "All"
+  - @categories.each do |category|
     %li{:role => "presentation"}
-      %a{:href => "/categories/all"}= "All"
-    - @categories.each do |category|
-      %li{:role => "presentation"}
-        %a{:href => "#{category_path(category)}"}= category.name
+      %a{:href => "#{category_path(category)}"}= category.name
 
-  .category_page
+.category_page
 

@@ -1,17 +1,17 @@
-.container
-	%h1.category-show-title
-		= @category.name + " Category"
-	= link_to 'Edit Category', edit_category_path(@category), id: "edit_category"
 
-	#category-editor
+%h1.category-show-title
+	= @category.name + " Category"
+= link_to 'Edit Category', edit_category_path(@category), id: "edit_category"
 
-	%h3 Animals
+#category-editor
 
-	#animal-adder
+%h3 Animals
 
-	.col-md-12.col-lg-10
-		= render @category.animals
+#animal-adder
 
-	.row.col-md-12
-		/ = link_to 'Edit', edit_category_path(@category)
-		/ = link_to 'Back', categories_path
+.col-md-12.col-lg-10
+	= render @category.animals
+
+.row.col-md-12
+	/ = link_to 'Edit', edit_category_path(@category)
+	/ = link_to 'Back', categories_path
