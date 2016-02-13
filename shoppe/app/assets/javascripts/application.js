@@ -15,12 +15,12 @@
 //= require_tree .
 $( document ).ready(function() {
   $.ajax({
-      method: 'GET',
-      url: '/categories/all'
-    })
-    .done(function(response){
-      $('.category_page').html(response)
-    })
+    method: 'GET',
+    url: '/categories/all'
+  })
+  .done(function(response){
+    $('.category_page').html(response)
+  })
 
   $('.nav-tabs').on('click', 'a', function(event){
     event.preventDefault();
@@ -47,60 +47,66 @@ $( document ).ready(function() {
   //   })
   // })
 
-  $('.add-content').on('click', 'a', function(e){
-    e.preventDefault();
-    var link = $(this).attr('href')
-    $.ajax({
-      method: 'GET',
-      url: link
-    })
-    .done(function(response){
-      $('.add-content-form').html(response)
-    })
+$('.add-content').on('click', 'a', function(e){
+  e.preventDefault();
+  var link = $(this).attr('href')
+  $.ajax({
+    method: 'GET',
+    url: link
+  })
+  .done(function(response){
+    $('.add-content-form').html(response)
+  })
+})
+
+$('.category_page').on('click', '#edit_category', function(e){
+  e.preventDefault();
+  var link = $(this).attr('href')
+  $.ajax({
+    method: 'GET',
+    url: link
+  })
+  .done(function(response){
+    $("#edit_category").hide();
+    $('#category-editor').html(response)
+  })
+})
+
+$('#order-history').on('click', 'a', function(e){
+  e.preventDefault();
+  link = $(this).attr('href');
+  $.ajax({
+    method: 'GET',
+    url: link
+  }).done(function(response){
+    $('#review-order').html(response);
+
   })
 
-  $('.category_page').on('click', '#edit_category', function(e){
-    e.preventDefault();
-    var link = $(this).attr('href')
-    $.ajax({
-      method: 'GET',
-      url: link
-    })
-    .done(function(response){
-      $("#edit_category").hide();
-      $('#category-editor').html(response)
-    })
-  })
+})
 
-  $('#order-history').on('click', 'a', function(e){
-    e.preventDefault();
-    link = $(this).attr('href');
-    $.ajax({
-      method: 'GET',
-      url: link
-    }).done(function(response){
-      $('#review-order').html(response);
-
-    })
-
-  })
-
-  $('.category_page').on('ajax:success', '.add_cart', function(e, data){
-     $('#cart-window').show();
-     $('#cart-window').html(data);
+$('.category_page').on('ajax:success', '.add_cart', function(e, data){
+ $('#cart-window').show();
+ $('#cart-window').html(data);
      // $('#cart_nav').html("=link_to 'Cart(#{Order.where(user_id: current_user.id, checked_out: false).length})', cart_path")
-  })
+   })
 
   $('#cart-window').on('click', '#close-window', function(e){
     e.preventDefault();
     $('#cart-window').hide();
   })
 
- // $('#cart-window').on('ajax:success', '.update-item', function(e, data){
- //    debugger;
- //    $('#cart-window').html(data);
- //  })
-
+  $('#cart-window').on('submit', '.edit_order', function(e){
+    e.preventDefault();
+    var url_link = $(this).attr('action');
+    $.ajax({
+      method: 'POST',
+      url: url_link,
+      data: $(this).serialize()
+    }).done(function(response){
+      $('#cart-window').html(response);
+    });
+  });
 });
 
 

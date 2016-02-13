@@ -4,12 +4,7 @@ class OrdersController < ApplicationController
     order = Order.find(params[:id])
 
     order.update(item_quantity: params[:order][:item_quantity])
-    # if request.xhr?
-    #   # debugger
-    #   @cart = User.find(current_user.id).orders.where(checked_out: false, item_quantity: !0).order(:created_at)
-    #   render template: "navigation/cart", layout: false
-    # else
-      redirect_to "/cart"
+    redirect_to "/cart"
     # end
 
   end
