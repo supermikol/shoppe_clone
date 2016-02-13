@@ -1,6 +1,7 @@
-%h1 Checkout Page
+%h1 Thank you for your order!
 
-%table.table.table-hover
+%h3 Order contents:
+%table.table.table-hover.width50
   %tr
     %th Item Name
     %th Item Quantity
@@ -16,3 +17,5 @@
     %td
     %td Total:
     %td= total.round(2)
+
+%h3= link_to "Please print this out for your records, then click here to go to your profile!", "profile"

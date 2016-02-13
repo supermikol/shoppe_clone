@@ -20,4 +20,4 @@
       -if animal.quantity == 0
         %div{style: "left: 5em; position: absolute; bottom: 0; color: #aaa" }Add to cart
       - else
-        = link_to "Add to cart", "order/#{animal.id}", method: :post, style: "left: 5em; position: absolute; bottom: 0"
+        = link_to "Add to cart", "order/#{animal.id}", method: :post, remote: true, style: "left: 5em; position: absolute; bottom: 0", class: "add_cart"

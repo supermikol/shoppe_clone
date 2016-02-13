@@ -16,3 +16,21 @@
 td {
   padding: 20px 30px 20px 20px;
  }
+
+
+/*#cart-window {
+  position: fixed;
+  background: grey;
+}*/
+
+
+#cart-window {
+  /*cursor: pointer;*/
+  display: block;
+  z-index: 3;
+  position: fixed; /*newly added*/
+  background: white;
+  text-align: center;
+  border: 3px solid #eee;
+  left: 35%;
+}

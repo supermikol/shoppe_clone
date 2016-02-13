@@ -16,5 +16,7 @@ Rails.application.routes.draw do
   get 'categories/:id', to: 'navigation#categories'
   get 'cart', to: 'navigation#cart'
   post 'order/:id', to: 'navigation#add_to_cart'
+  get 'profile', to: 'navigation#profile'
+  get 'history/:id', to: 'orders#view'
 
 end

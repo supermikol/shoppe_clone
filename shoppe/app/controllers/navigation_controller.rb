@@ -22,7 +22,12 @@ class NavigationController < ApplicationController
   end
 
   def cart
-    @cart = User.find(current_user.id).orders.where(checked_out: false)
+    to_delete = User.find(current_user.id).orders.where(item_quantity: 0)
+    Order.delete(to_delete)
+    @cart = User.find(current_user.id).orders.where(checked_out: false).order(:created_at)
+    if request.xhr?
+      render 'cart', layout: false
+    end
   end
 
   def add_to_cart
@@ -32,7 +37,24 @@ class NavigationController < ApplicationController
     else
       Order.create(animal_id: params[:id], user_id: current_user.id, item_quantity: 1)
     end
-    redirect_to '/cart'
+    if request.xhr?
+      @cart = User.find(current_user.id).orders.where(checked_out: false).order(:created_at)
+      render 'cart', layout: false
+    end
+  end
+
+  def profile
+    user_orders = Order.where(user_id: 1, checked_out: true)
+    user_order_nums = []
+    user_orders.each do |order|
+      user_order_nums << order.order_num
+    end
+    user_order_nums = user_order_nums.uniq.sort.reverse
+
+    @array_of_orders = []
+    user_order_nums.each do |num|
+      @array_of_orders << Order.where(order_num: num)
+    end
   end
 
 end

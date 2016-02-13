@@ -1,34 +1,44 @@
 class OrdersController < ApplicationController
-  $ordernum = 1
 
   def update
     order = Order.find(params[:id])
 
     order.update(item_quantity: params[:order][:item_quantity])
-    redirect_to "/cart"
+    # if request.xhr?
+    #   # debugger
+    #   @cart = User.find(current_user.id).orders.where(checked_out: false, item_quantity: !0).order(:created_at)
+    #   render template: "navigation/cart", layout: false
+    # else
+      redirect_to "/cart"
+    # end
+
   end
 
   def checkout
-    # if Order.find(:all, :conditions => "order.order_num IS NOT NULL")
-    #   order_num = Order.last.order_num + 1
-    # else
-    #   order_num = 1
-    # end
+    order_num = (Order.all.where.not('order_num' => nil).max_by {|x| x.order_num}.order_num + 1)
     orders = Order.where(user_id: current_user.id, checked_out: false)
     orders.each do |order|
       order.checked_out = true
       order.checkout_date = DateTime.now
-      order.order_num = $ordernum
+      order.order_num = order_num
       order.save
-      p order
     end
-      $ordernum += 1
 
     redirect_to "/checkout"
   end
 
   def checkout_complete
-    @orders = Order.where(user_id: current_user.id, checked_out: true)
+    order_num = Order.where(user_id: current_user.id, checked_out: true).max_by {|x| x.order_num}.order_num
+    @orders = Order.where(user_id: current_user.id, order_num: order_num, checked_out: true)
     render "checkout"
   end
+
+  def view
+    @user_orders = Order.where(user_id: current_user.id, order_num: params[:id], checked_out: true)
+    if request.xhr?
+      render 'view', layout: false
+    end
+
+  end
+
 end

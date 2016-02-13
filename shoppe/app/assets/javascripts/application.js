@@ -71,6 +71,36 @@ $( document ).ready(function() {
       $('#category-editor').html(response)
     })
   })
+
+  $('#order-history').on('click', 'a', function(e){
+    e.preventDefault();
+    link = $(this).attr('href');
+    $.ajax({
+      method: 'GET',
+      url: link
+    }).done(function(response){
+      $('#review-order').html(response);
+
+    })
+
+  })
+
+  $('.category_page').on('ajax:success', '.add_cart', function(e, data){
+     $('#cart-window').show();
+     $('#cart-window').html(data);
+     // $('#cart_nav').html("=link_to 'Cart(#{Order.where(user_id: current_user.id, checked_out: false).length})', cart_path")
+  })
+
+  $('#cart-window').on('click', '#close-window', function(e){
+    e.preventDefault();
+    $('#cart-window').hide();
+  })
+
+ // $('#cart-window').on('ajax:success', '.update-item', function(e, data){
+ //    debugger;
+ //    $('#cart-window').html(data);
+ //  })
+
 });
 
 
