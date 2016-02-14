@@ -11,7 +11,7 @@
       %tr
         %td.bg-success= item.animal.name
         %td.bg-info
-          =form_for item do |f|
+          =form_for item, remote: true do |f|
             = f.number_field :item_quantity, value: item.item_quantity
             = f.submit "Update", class: "btn btn-success update-item"
         %td.bg-info= (item.animal.price * item.item_quantity).round(2)

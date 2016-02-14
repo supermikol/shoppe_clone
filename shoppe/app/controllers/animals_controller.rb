@@ -56,11 +56,14 @@ class AnimalsController < ApplicationController
 
   end
 
+
+  #WILL ONLY HIDE ANIMALS, BECAUSE DELETE WILL REMOVE ORDERS FROM ORDER HISTORY
   def destroy
-    @animal = Animal.find(params[:id])
-    @animal.categories = []
-    @animal.delete
-    redirect_to categories_path
+    animal = Animal.find(params[:id])
+    animal.removed = true
+    animal.save
+    #status:303 fixes rerouting issue of double delete
+    redirect_to categories_path, status: 303
   end
 
 private

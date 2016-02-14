@@ -7,6 +7,7 @@ class CreateAnimals < ActiveRecord::Migration
       t.text :details
       t.integer :quantity, default: 0
       t.float :price
+      t.boolean :removed, default: false
       t.timestamps null: false
     end
   end

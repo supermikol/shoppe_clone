@@ -21,8 +21,8 @@
 						%li
 							=link_to "Login", new_user_session_path
 					- else
-						%li
-							=link_to "Cart", cart_path, id: "cart_nav"
+						%li#cart_nav
+							=link_to "Cart(#{User.find(current_user).orders.where(checked_out: false).length})", cart_path, remote: true
 						%li
 							=link_to "Profile", profile_path
 						- if current_user.admin
@@ -38,4 +38,5 @@
 			- else
 				%div{:class => "alert alert-#{message_type}"}= message
 	.container
+		#cart-window.some{ :style => "display: none" }
 		= yield

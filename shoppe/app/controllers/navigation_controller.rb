@@ -14,7 +14,7 @@ class NavigationController < ApplicationController
 
   def categories
     @category = Category.find(params[:id])
-    @animals = @category.animals
+    @animals = @category.animals.where(removed? == false)
     if request.xhr?
       @admin = false
       render 'show', layout: false
@@ -22,24 +22,9 @@ class NavigationController < ApplicationController
   end
 
   def cart
-    to_delete = User.find(current_user.id).orders.where(item_quantity: 0)
-    Order.delete(to_delete)
     @cart = User.find(current_user.id).orders.where(checked_out: false).order(:created_at)
     if request.xhr?
-      render 'cart', layout: false
-    end
-  end
-
-  def add_to_cart
-    if order = Order.find_by(animal_id: params[:id], checked_out: false)
-      quantity = order.item_quantity
-      order.update(item_quantity: quantity + 1)
-    else
-      Order.create(animal_id: params[:id], user_id: current_user.id, item_quantity: 1)
-    end
-    if request.xhr?
-      @cart = User.find(current_user.id).orders.where(checked_out: false).order(:created_at)
-      render 'cart', layout: false
+      render '_cart', layout: false
     end
   end
 

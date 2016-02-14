@@ -12,12 +12,12 @@
 
   - if @admin
     .row
-      = link_to "Obliterate", animal_path(animal), style: "text-align: right; position: absolute; bottom: 0; right: 10px", method: :delete, data: {confirm: 'Are you sure?'}
-      = link_to "Edit", edit_animal_path(animal), style: "position: absolute; bottom: 0", id: "edit_animal_#{animal.id}"
+      = link_to "Obliterate", animal_path(animal), remote: true, style: "text-align: right; position: absolute; bottom: 0; right: 10px", method: :delete, data: {confirm: 'Are you sure?'}, class: "delete_animal"
+      = link_to "Edit", edit_animal_path(animal), remote: true, style: "position: absolute; bottom: 0", id: "edit_animal_#{animal.id}", class: "edit_animal"
 
   - else
     .row
       -if animal.quantity == 0
         %div{style: "left: 5em; position: absolute; bottom: 0; color: #aaa" }Add to cart
       - else
-        = link_to "Add to cart", "order/#{animal.id}", method: :post, remote: true, style: "left: 5em; position: absolute; bottom: 0", class: "add_cart"
+        = link_to "Add to cart", "cart/#{animal.id}", method: :post, remote: true, style: "left: 5em; position: absolute; bottom: 0", class: "add_cart"

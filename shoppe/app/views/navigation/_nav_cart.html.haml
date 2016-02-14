@@ -1,0 +1,1 @@
+=link_to "Cart(#{User.find(current_user).orders.where(checked_out: false).length})", cart_path, remote: true

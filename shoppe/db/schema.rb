@@ -23,8 +23,9 @@ ActiveRecord::Schema.define(version: 20160211225659) do
     t.text     "details"
     t.integer  "quantity",   default: 0
     t.float    "price"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.boolean  "removed",    default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "animals_categories", force: :cascade do |t|
