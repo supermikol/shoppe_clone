@@ -2,21 +2,41 @@
 %html
 	%head
 		%meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+		%meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
 		%title Shoppe
 		%link{:crossorigin => "anonymous", :href => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", :integrity => "sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7", :rel => "stylesheet"}/
-		= stylesheet_link_tag    'application', media: 'all'
 		= javascript_include_tag 'application'
+		= stylesheet_link_tag    'application', media: 'all'
+		%script{:crossorigin => "anonymous", :integrity => "sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS", :src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"}
 		= csrf_meta_tags
 	%body
-		.container-fluid
-			.row.col-md-12
-				%h1
-				%a.navbar-brand{:href => "/"} Sea Animal Pet Store 
-				%nav
-					%ul.nav.navbar-nav.navbar-right
+		%nav.navbar
+			.container-fluid
+				.navbar-header
+					%a.navbar-brand{:href => "/"} Sea Animal Pet Store
+				%ul.nav.navbar-nav.navbar-right
+					- if !user_signed_in?
 						%li
-							%a{:href => "/users/new"} Sign Up
+							=link_to "Register", new_user_registration_path
 						%li
-							%a{:href => "/users/login"} Log in
+							=link_to "Login", new_user_session_path
+					- else
+						%li#cart_nav
+							=link_to "Cart(#{User.find(current_user).orders.where(checked_out: false).length})", cart_path, remote: true
+						%li
+							=link_to "Profile", profile_path
+						- if current_user.admin
+							%li
+								=link_to "Admin", categories_path
+						%li
+							=link_to "Log out", destroy_user_session_path, method: :delete
 		.container
-	= yield
+		- flash.each do |message_type, message|
+			- if message.is_a?(Array)
+				- message.each do |x|
+					%div{:class => "alert alert-#{message_type}"}= x
+			- else
+				%div{:class => "alert alert-#{message_type}"}= message
+	.container
+		#cart-window.some{ :style => "display: none" }
+		= yield

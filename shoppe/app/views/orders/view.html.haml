@@ -1,0 +1,20 @@
+%table.table.table-hover.width50
+  %tr
+    %th.bg-info= "Order Number: #{@user_orders.first.order_num}"
+    %th.bg-info.table-width20= "Order Date: #{@user_orders.first.checkout_date}"
+    %th.bg-info.table-width20
+  %tr
+    %th.bg-success Item Name
+    %th.bg-success.table-width20 Item Quantity
+    %th.bg-success.table-width20 Price
+  -total = 0
+  -@user_orders.each do |order|
+    %tr
+      %td= order.animal.name
+      %td.table-width20= order.item_quantity
+      %td.table-width20= (order.animal.price * order.item_quantity).round(2)
+      -total += order.animal.price * order.item_quantity
+  %tr
+    %td
+    %th.bg-info.table-width20 Total:
+    %th.bg-info.table-width20= total.round(2)

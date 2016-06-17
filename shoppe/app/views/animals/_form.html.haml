@@ -1,4 +1,4 @@
-=form_for([@category, @animal]) do |f|
+=form_for(@animal) do |f|
   %label
     = f.label :name
   %p
@@ -12,8 +12,23 @@
   %p
     = f.text_area :details
   %label
+    = f.label :img_url
+  %p
+    = f.text_field :img_url
+  %label
+    = f.label :categories
+    = f.collection_check_boxes :category_ids, Category.all, :id, :name do |b|
+      .collection-check-box
+        = b.check_box
+        = b.label
+  %br
+  %label
+    = f.label :quantity
+  %p
+    = f.number_field :quantity
+  %label
     = f.label :price
   %p
     = f.number_field :price
   %label
-    = f.submit
+    = f.submit "Create Animal", class: "btn btn-success"

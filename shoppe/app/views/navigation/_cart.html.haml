@@ -1,0 +1,28 @@
+%h2 Your Shopping Cart
+
+%table.table.table-hover
+  %tr
+    %th Item name
+    %th Item Quantity
+    %th Price
+  - if @cart
+    -total = 0
+    -@cart.each do |item|
+      %tr
+        %td.bg-success= item.animal.name
+        %td.bg-info
+          =form_for item, remote: true do |f|
+            = f.number_field :item_quantity, value: item.item_quantity
+            = f.submit "Update", class: "btn btn-success update-item"
+        %td.bg-info= (item.animal.price * item.item_quantity).round(2)
+        -total += item.animal.price * item.item_quantity
+    %tr
+      %td
+      %td Total
+      %td= total.round(2)
+    %tr
+      %td
+        = link_to "Close Window", "#", id: "close-window"
+      %td
+      %td
+        = link_to "Checkout", checkout_path, method: :put

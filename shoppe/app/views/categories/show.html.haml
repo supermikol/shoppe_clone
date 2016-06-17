@@ -1,19 +1,17 @@
-.container
-	%h1.category-show-title	
-		= @category.name
 
+%h1.category-show-title
+	= @category.name + " Category"
+= link_to 'Edit Category', edit_category_path(@category), id: "edit_category"
 
-	%h3 Animals
+#category-editor
 
-	.col-md-12
-		= render @category.animals
+%h3 Animals
 
+#animal-adder
 
-	- @animal = @category.animals.build
-	.row.col-md-12
-		%h3 Add an Animal
-		= render 'animals/form'
+.col-md-12.col-lg-10
+	= render @category.animals.where(removed: false)
 
-	.row.col-md-12
-		= link_to 'Edit', edit_category_path(@category)
-		= link_to 'Back', categories_path
+.row.col-md-12
+	/ = link_to 'Edit', edit_category_path(@category)
+	/ = link_to 'Back', categories_path

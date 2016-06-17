@@ -1,0 +1,18 @@
+%h1 Profile
+
+%h3 Order History:
+
+%table.table.table-hover.width50#order-history
+  %tr
+    %th Order Num
+    %th Order Date
+    %th
+  -@array_of_orders.each do |orders_grouped|
+    %tr
+      %th= orders_grouped.first.order_num
+      %th= orders_grouped.first.checkout_date
+      %th= link_to "Review Order", "history/#{orders_grouped.first.order_num}"
+%br
+#review-order
+
+

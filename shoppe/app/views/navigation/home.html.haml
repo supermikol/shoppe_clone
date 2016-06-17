@@ -1,1 +1,12 @@
-Welcome to the home page
+.container
+
+  %h1 Sea Animal Categories
+  %ul.nav.nav-tabs
+    %li{:role => "presentation"}
+      %a{:href => "/categories/all"}= "All"
+    - @categories.each do |category|
+      %li{:role => "presentation"}
+        %a{:href => "/categories/#{category.id}"}= category.name
+
+  .category_page
+    / =render 'all'

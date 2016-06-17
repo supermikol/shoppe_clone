@@ -1,6 +1,7 @@
 =form_for @category do |f|
-  %p
+  %label
     = f.label :name
+  %p
     = f.text_field :name
   %p
-    = f.submit
+    = f.submit "Submit", class: "btn btn-success"

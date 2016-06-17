@@ -2,3 +2,18 @@
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
+
+body {
+  background-image: url("symphony.png");
+}
+
+.container, .navbar {
+  background-color: white;
+}
+.table-width20 {
+  width: 20%;
+}
+
+.width50 {
+  width: 80%;
+}

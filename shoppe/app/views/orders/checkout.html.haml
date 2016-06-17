@@ -1,0 +1,21 @@
+%h1 Thank you for your order!
+
+%h3 Order contents:
+%table.table.table-hover.width50
+  %tr
+    %th Item Name
+    %th Item Quantity
+    %th Price
+  -total = 0
+  - @orders.each do |order|
+    %tr
+      %td= order.animal.name
+      %td= order.item_quantity
+      %td= (order.animal.price * order.item_quantity).round(2)
+      -total += order.animal.price * order.item_quantity
+  %tr
+    %td
+    %td Total:
+    %td= total.round(2)
+
+%h3= link_to "Please print this out for your records, then click here to go to your profile!", "profile"

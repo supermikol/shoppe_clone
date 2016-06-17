@@ -1,0 +1,36 @@
+/** {
+  outline: 1px solid blue;
+}*/
+
+.individual-animal {
+  margin: 10px;
+  padding: 30px;
+  border: solid 1px #eee;
+  height: 26em;
+}
+
+.table-categories {
+  border: 1px solid #ddd;
+}
+
+td {
+  padding: 20px 30px 20px 20px;
+ }
+
+
+/*#cart-window {
+  position: fixed;
+  background: grey;
+}*/
+
+
+#cart-window {
+  /*cursor: pointer;*/
+  display: block;
+  z-index: 3;
+  position: fixed; /*newly added*/
+  background: white;
+  text-align: center;
+  border: 3px solid #eee;
+  left: 35%;
+}
